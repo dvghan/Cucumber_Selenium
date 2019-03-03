@@ -3,6 +3,7 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -11,13 +12,22 @@ import org.junit.Assert;
 
 public class test {
     public static WebDriver driver;
+	private static ChromeOptions options;
+	
     @Given("^user is on homepage$")
     public void user_is_on_homepage() throws Throwable {     
     	//System.setProperty("webdriver.gecko.driver","/Users/Documents/geckodriver");
         //driver = new FirefoxDriver();
 
-        System.setProperty("webdriver.chrome.driver","C:\\Users\\dnghan\\Libs\\Selenium-Java\\chromedriver.exe");   
- 		driver = new ChromeDriver();    
+        //System.setProperty("webdriver.chrome.driver","C:\\Users\\dnghan\\Libs\\Selenium-Java\\chromedriver.exe");   
+ 		//driver = new ChromeDriver();    
+
+ 		final String binaryPath = "C:\\Users\\dnghan\\AppData\\Local\\Google\\Chrome\\Application\\chrome.exe";
+ 		System.setProperty("webdriver.chrome.driver","C:\\Users\\dnghan\\Libs\\Selenium-Java\\chromedriver.exe");   
+ 		ChromeOptions chromeOpt= new ChromeOptions();
+		chromeOpt.setBinary(binaryPath);
+		
+		driver = new ChromeDriver (chromeOpt);
 
         
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
