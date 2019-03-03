@@ -23,5 +23,5 @@ public class testrunner {
     @AfterClass
     public static void writeExtentReport() {
         Reporter.loadXMLConfig(new File("config/report.xml"));
-  
+    }
 }
