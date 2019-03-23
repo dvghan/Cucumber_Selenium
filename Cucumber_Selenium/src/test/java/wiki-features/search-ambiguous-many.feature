@@ -16,7 +16,7 @@
 #""
 ## (Comments)
 #Sample Feature Definition Template
-@ParamSearch
+#@ParamSearch
 Feature: Parameterised Wikipedia Search
   Verify if user is able to search Wikipedia
 

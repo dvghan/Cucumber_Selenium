@@ -15,7 +15,8 @@ import com.cucumber.listener.ExtentCucumberFormatter;
 @RunWith(Cucumber.class)
 @CucumberOptions(
 		features = "src/test/java/wiki-features",
-		tags="@SimpleSearch, @ParamSearch",  format = {"pretty"},
+		//tags="@SimpleSearch, @ParamSearch",  format = {"pretty"},
+		tags="@SimpleSearch",  format = {"pretty"},
 		glue = {"wiki_gluecode"},
 		plugin = { "com.cucumber.listener.ExtentCucumberFormatter:target/cucumber-reports/wiki-report.html"
 				, "json:target/cucumber-reports/wiki-Cucumber.json"

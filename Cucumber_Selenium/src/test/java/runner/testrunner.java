@@ -9,23 +9,6 @@ import org.junit.AfterClass;
 import com.cucumber.listener.ExtentCucumberFormatter;
 import com.cucumber.listener.Reporter;
 
-/*
-
-@RunWith(Cucumber.class)
-@CucumberOptions(
-		features = "src/test/java/features",
-		glue= {"seleniumgluecode"},
-		plugin = {  "pretty", "json:target/cucumber-reports/Cucumber.json",
-					"junit:target/cucumber-reports/Cucumber.xml",
-					"html:target/cucumber-reports"},
- 		monochrome = true
-)
-
-public class testrunner {
-
-}
-*/
-
 @RunWith(Cucumber.class)
 @CucumberOptions(
 		features = "src/test/java/features",

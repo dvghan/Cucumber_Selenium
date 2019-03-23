@@ -7,9 +7,25 @@
 	<packaging>jar</packaging>
 	<name>Cucumber_Selenium</name>
 	<url>http://maven.apache.org</url>
-	
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		
+		<maven.compiler.source>1.5</maven.compiler.source>
+		<maven.compiler.target>1.5</maven.compiler.target>
+		<jacoco.version>0.7.5.201505241946</jacoco.version>
+
+		<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+		<sonar.jacoco.reportPath>target/jacoco.exec</sonar.jacoco.reportPath>
+		<sonar.language>java</sonar.language>		
+
+		<!-- 
+		<sonar.sources>src</sonar.sources>
+		<sonar.binaries>target/test-classes</sonar.binaries>
+		<sonar.tests>junit</sonar.tests>
+		<sonar.junit.reportsPath>target/cucumber-reports</sonar.junit.reportsPath>
+		-->	
 	</properties>
 
 	<dependencies>
@@ -26,6 +42,7 @@
 		</dependency>
 
 
+		
 		<dependency>
 			<groupId>info.cukes</groupId>
 			<artifactId>cucumber-java</artifactId>
@@ -58,4 +75,95 @@
 	   	</dependency>
    	
 	</dependencies> 
+	
+	<build>
+		<!--
+		<directory>target</directory>
+		<outputDirectory>classes</outputDirectory>
+		<testOutputDirectory>test-classes</testOutputDirectory>
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<scriptSourceDirectory>src/main/scripts</scriptSourceDirectory>
+		<testSourceDirectory>src/test/java</testSourceDirectory>
+		-->
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<!-- <version>3.6.1</version> -->
+				<version>3.8.0</version>
+				<configuration>
+				<!--<skipMain>true</skipMain>
+					<skip>true</skip>  -->
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.7.5.201505241946</version>
+				<executions>
+					<execution>
+						<id>prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+
+					<execution>
+						<id>default-report</id>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+
+					<!--
+					-->
+					<execution>
+						<id>post-unit-test</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+						<configuration>
+							<!-- Sets the path to the file which contains the execution data. -->
+							<dataFile>target/jacoco.exec</dataFile>
+							<!-- Sets the output directory for the code coverage report. -->
+							<outputDirectory>target/jacoco/jacoco-ut</outputDirectory>
+
+							<destFile>target/jacoco/jacoco.exec</destFile>
+							<append>true</append>
+
+						</configuration>
+					</execution>
+				</executions>
+				<configuration>
+					<systemPropertyVariables>
+						<jacoco-agent.destfile>target/jacoco/jacoco.exec</jacoco-agent.destfile>
+					</systemPropertyVariables>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>2.17</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.22.1</version>
+				<configuration>
+					<includes>
+						<include>**/*.java</include>
+					</includes>
+					<skipTests>false</skipTests>
+				</configuration>
+			</plugin>			
+			
+		</plugins>
+	</build>
+	
+	
+	
 </project>

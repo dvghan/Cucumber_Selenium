@@ -26,19 +26,19 @@ Feature: Wikipedia Search
     Then Single result is shown for 'Freddie Mercury'
     And This is good article
 
-  Scenario: direct search for not good article
-    Given Enter search term 'Cucumber'
-    When Do search
-    Then Single result is shown for 'Cucumber'
-    And This is not good article
+#  Scenario: direct search for not good article
+#    Given Enter search term 'Cucumber'
+#    When Do search
+#    Then Single result is shown for 'Cucumber'
+#    And This is not good article
 
-@ParamSearch
-  Scenario Outline: Parameterised search for good article
-    Given Enter search term '<searchTerm>'
-    When Do search
-    Then Multiple results are shown for '<result>'
+#@ParamSearch
+#  Scenario Outline: Parameterised search for good article
+#    Given Enter search term '<searchTerm>'
+#    When Do search
+#    Then Multiple results are shown for '<result>'
 
-    Examples:
-      | searchTerm | result                     |
-      | mercury    | Mercury usually refers to: |
-      | max        | Max or MAX may refer to:   |
+#    Examples:
+#      | searchTerm | result                     |
+#      | mercury    | Mercury usually refers to: |
+#      | max        | Max or MAX may refer to:   |
