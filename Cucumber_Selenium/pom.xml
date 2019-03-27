@@ -14,6 +14,7 @@
 		<maven.compiler.source>1.5</maven.compiler.source>
 		<maven.compiler.target>1.5</maven.compiler.target>
 		<jacoco.version>0.7.5.201505241946</jacoco.version>
+		<jacoco.classDumpDir>${project.build.directory}/classdumps</jacoco.classDumpDir>
 
 		<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
 		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
@@ -21,8 +22,12 @@
 		<sonar.language>java</sonar.language>		
 
 		<!-- 
-		<sonar.sources>src</sonar.sources>
+		<jacoco.agent.argLine>-Xms256m -Xmx1524m -XX:MaxPermSize=256m -Duser.language=en</jacoco.agent.argLine>
+
 		<sonar.binaries>target/test-classes</sonar.binaries>
+		<sonar.jacoco.reportPath>target</sonar.jacoco.reportPath>
+		<sonar.coverage.jacoco.xmlReportPaths>jacoco/jacoco-ut</sonar.coverage.jacoco.xmlReportPaths>
+		<sonar.sources>src</sonar.sources>
 		<sonar.tests>junit</sonar.tests>
 		<sonar.junit.reportsPath>target/cucumber-reports</sonar.junit.reportsPath>
 		-->	
@@ -89,7 +94,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<!-- <version>3.6.1</version> -->
+				<!--<version>3.6.1</version> -->
 				<version>3.8.0</version>
 				<configuration>
 				<!--<skipMain>true</skipMain>
@@ -102,12 +107,26 @@
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.7.5.201505241946</version>
+				<!-- <version>0.8.3</version> -->
 				<executions>
 					<execution>
-						<id>prepare-agent</id>
+						<!-- <id>prepare-agent</id> -->
+						<id>pre-unit-test</id>
 						<goals>
 							<goal>prepare-agent</goal>
 						</goals>
+						
+						<configuration>
+							<destFile>target/jacoco.exec</destFile>
+							<!--
+								Sets the name of the property containing the settings
+								for JaCoCo runtime agent.
+							<propertyName>surefireArgLine</propertyName>
+							
+							<propertyName>${jacoco.agent.argLine}</propertyName>
+							-->
+						</configuration>
+						
 					</execution>
 
 					<execution>
@@ -131,17 +150,19 @@
 							<!-- Sets the output directory for the code coverage report. -->
 							<outputDirectory>target/jacoco/jacoco-ut</outputDirectory>
 
-							<destFile>target/jacoco/jacoco.exec</destFile>
+							<!-- <destFile>target/jacoco/jacoco.exec</destFile> -->
 							<append>true</append>
 
 						</configuration>
 					</execution>
 				</executions>
+				<!--
 				<configuration>
 					<systemPropertyVariables>
 						<jacoco-agent.destfile>target/jacoco/jacoco.exec</jacoco-agent.destfile>
 					</systemPropertyVariables>
 				</configuration>
+				-->
 			</plugin>
 			
 			<plugin>
@@ -154,13 +175,19 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.22.1</version>
 				<configuration>
+					<!-- Sets the VM argument line used when unit tests are run. -->
+					
+					<!-- <argLine>${surefireArgLine}</argLine>
+					<argLine>${jacoco.agent.argLine}</argLine> -->
+					<reportsDirectory>target/surefire-reports</reportsDirectory>
+					<skipTests>false</skipTests>
 					<includes>
 						<include>**/*.java</include>
 					</includes>
-					<skipTests>false</skipTests>
+					
 				</configuration>
 			</plugin>			
-			
+		
 		</plugins>
 	</build>
 	
