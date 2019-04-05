@@ -18,10 +18,15 @@
 
 		<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
 		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
-		<sonar.jacoco.reportPath>target/jacoco.exec</sonar.jacoco.reportPath>
+		<sonar.jacoco.reportPaths>target/jacoco.exec</sonar.jacoco.reportPaths>
 		<sonar.language>java</sonar.language>		
 
+		<sonar.surefire.reportsPath>target/surefire-reports</sonar.surefire.reportsPath>
+		<sonar.binaries>target/classes</sonar.binaries>
+		<sonar.coverage.jacoco.xmlReportPaths>target/jacoco/jacoco-ut</sonar.coverage.jacoco.xmlReportPaths>
+		
 		<!-- 
+		<sonar.tests>junit</sonar.tests>
 		<jacoco.agent.argLine>-Xms256m -Xmx1524m -XX:MaxPermSize=256m -Duser.language=en</jacoco.agent.argLine>
 
 		<sonar.binaries>target/test-classes</sonar.binaries>
