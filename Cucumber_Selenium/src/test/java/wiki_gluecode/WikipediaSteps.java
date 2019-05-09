@@ -32,6 +32,7 @@ public class WikipediaSteps extends BaseSteps {
 
     @Given("^Enter search term '(.*?)'$")
     public void searchFor(String searchTerm) {
+    	//driver.manage().window().maximize();
         WebElement searchField = driver.findElement(By.id("searchInput"));
         searchField.sendKeys(searchTerm);
     }
@@ -43,7 +44,7 @@ public class WikipediaSteps extends BaseSteps {
         //long timeOutInSeconds = 5;
 		//WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
 		//wait.until(ExpectedConditions.invisibilityOfElementLocated(searchButton));
-        wait(2);
+        //wait(2);
         searchButton.click();
     }
 
