@@ -6,6 +6,8 @@ import java.time.format.DateTimeFormatter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
@@ -36,9 +38,13 @@ public class WikipediaSteps extends BaseSteps {
 
     @When("^Do search$")
     public void clickSearchButton() {
+    	driver.manage().window().maximize();
         WebElement searchButton = driver.findElement(By.id("searchButton"));
-        searchButton.click();
+        //long timeOutInSeconds = 5;
+		//WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
+		//wait.until(ExpectedConditions.invisibilityOfElementLocated(searchButton));
         wait(2);
+        searchButton.click();
     }
 
     @Then("^Multiple results are shown for '(.*?)'$")
